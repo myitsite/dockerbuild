@@ -73,7 +73,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          target: production
           builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/amd64,linux/arm64
           push: true
@@ -81,6 +80,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+          args: |
+            TARGETARCH=arm64
 
       - name: Inspect image
         run: |
