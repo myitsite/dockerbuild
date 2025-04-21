@@ -3,8 +3,6 @@ FROM kubespheredev/builder-base:v3.1.0-podman
 ARG JDK_VERSION 17.0.13
 ARG JDK_HOME /usr/lib/jvm/java-${JDK_VERSION}-openjdk
 
-COPY set_java $M2
-
 # java
 ENV JAVA_VERSION $JDK_VERSION
 
