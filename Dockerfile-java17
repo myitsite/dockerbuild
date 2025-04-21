@@ -15,7 +15,7 @@ RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
             aarch64) ARCH='aarch64';; \
             *) echo "unsupported architecture"; exit 1 ;; \
         esac \
-        echo ${ARCH}
+        && echo ${ARCH} \
     else \
         yum install -y java-${JAVA_VERSION}-openjdk-devel java-${JAVA_VERSION}-openjdk-devel.i686; \
     fi
