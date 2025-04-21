@@ -18,7 +18,7 @@ RUN echo "=== 调试信息 ===" && \
 # java
 ENV JAVA_VERSION $JDK_VERSION
 
-ARCH=""
+ARG ARCH=""
 RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
         uArch="$(uname -m)" \
         && case "${uArch##*-}" in \
