@@ -21,7 +21,7 @@ ENV JAVA_VERSION $JDK_VERSION
 ARG ARCH=""
 
 RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
-        ARCH="$(uname -m)" 
+        ARCH="$(uname -m)"; \
         && wget https://zacms.oss-cn-chengdu.aliyuncs.com/jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; \
         && rpm -ivh jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; \
     else \
