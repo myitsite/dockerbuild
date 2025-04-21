@@ -8,7 +8,7 @@ COPY set_java $M2
 # java
 ENV JAVA_VERSION $JDK_VERSION
 
-RUN if [ "x${JAVA_VERSION}" = "x17*" ]; then \
+RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
       ARCH= && uArch="$(uname -m)" \
         && case "${uArch##*-}" in \
           x86_64) ARCH='x64';; \
