@@ -16,6 +16,8 @@ RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
             *) echo "unsupported architecture"; exit 1 ;; \
         esac \
         && echo ${ARCH} \
+        && wget https://zacms.oss-cn-chengdu.aliyuncs.com/jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm \
+        && rpm -ivh jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; \
     else \
         yum install -y java-${JAVA_VERSION}-openjdk-devel java-${JAVA_VERSION}-openjdk-devel.i686; \
     fi
