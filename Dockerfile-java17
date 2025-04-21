@@ -15,18 +15,10 @@ RUN echo "=== 调试信息 ===" && \
     echo "当前JAVA版本: $(JDK_VERSION)" && \
     echo "当前目录: $(pwd)"
 
-
-
 # java
 ENV JAVA_VERSION $JDK_VERSION
 
-ARG ARCH=""
-
-RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
-        ARCH="$(uname -m)"; \
-    else \
-        yum install -y java-${JAVA_VERSION}-openjdk-devel java-${JAVA_VERSION}-openjdk-devel.i686; \
-    fi
+ARG ARCH="$(uname -m)"
 
 RUN echo "=== 系统架构===" && \
     echo "ARCH: ${ARCH}"
