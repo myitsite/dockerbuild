@@ -19,14 +19,11 @@ RUN echo "=== 调试信息 ===" && \
 ENV JAVA_VERSION $JDK_VERSION
 
 ARG ARCH=""
+
 RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
-        uArch="$(uname -m)" \
-        && case "${uArch##*-}" in \
-            x86_64) ARCH='x64';; \
-            aarch64) ARCH='aarch64';; \
-            *) echo "unsupported architecture"; exit 1 ;; \
-        esac \
-        && echo ${ARCH} \
+        ARCH="$(uname -m)" 
+        && wget https://zacms.oss-cn-chengdu.aliyuncs.com/jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; \
+        && rpm -ivh jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; \
     else \
         yum install -y java-${JAVA_VERSION}-openjdk-devel java-${JAVA_VERSION}-openjdk-devel.i686; \
     fi
