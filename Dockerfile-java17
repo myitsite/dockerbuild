@@ -18,7 +18,6 @@ RUN echo "=== 调试信息 ===" && \
 # java
 ENV JAVA_VERSION $JDK_VERSION
 
-ARG ARCH=$(uname -m)
 
 RUN echo "=== 系统架构===" && \
-    echo "ARCH: ${ARCH}"
+    echo "ARCH: $(uname -m)"
