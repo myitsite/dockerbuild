@@ -3,11 +3,24 @@ FROM kubespheredev/builder-base:v3.1.0-podman
 ARG JDK_VERSION 17.0.13
 ARG JDK_HOME /usr/lib/jvm/java-${JDK_VERSION}-openjdk
 
+# 定义构建参数
+ARG BUILD_ENV=production
+ENV RUNTIME_ENV=${BUILD_ENV}
+
+# 打印所有信息
+RUN echo "=== 调试信息 ===" && \
+    echo "构建参数 BUILD_ENV: ${BUILD_ENV}" && \
+    echo "运行时环境 RUNTIME_ENV: ${RUNTIME_ENV}" && \
+    echo "当前用户: $(whoami)" && \
+    echo "当前目录: $(pwd)"
+
+
 # java
 ENV JAVA_VERSION $JDK_VERSION
 
+ARCH=""
 RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
-        ARCH="" && uArch="$(uname -m)" \
+        uArch="$(uname -m)" \
         && case "${uArch##*-}" in \
             x86_64) ARCH='x64';; \
             aarch64) ARCH='aarch64';; \
@@ -17,3 +30,5 @@ RUN if [[ "x${JAVA_VERSION}" == x17* ]]; then \
     else \
         yum install -y java-${JAVA_VERSION}-openjdk-devel java-${JAVA_VERSION}-openjdk-devel.i686; \
     fi
+
+RUN  echo ${ARCH} 
