@@ -19,10 +19,11 @@ RUN echo "=== 调试信息 ===" && \
 ENV JAVA_VERSION $JDK_VERSION
 
 
-RUN echo "=== 系统架构===" && \
-    echo "ARCH: $(uname -m)"
-
-ENV ARCH=$(uname -m)
+# 先通过 RUN 获取架构，再通过 ARG 传递
+RUN ARCH=$(uname -m) && echo "ARCH: $ARCH"
+# 将 ARCH 作为构建参数（ARG）传递
+ARG ARCH
+ENV ARCH=$ARCH
 
 RUN  wget https://zacms.oss-cn-chengdu.aliyuncs.com/jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; 
 RUN  rpm -ivh jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm;
