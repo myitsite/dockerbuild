@@ -83,7 +83,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           args: |
-            JDK_VERSION=17.0.13
+            TARGETARCH=arm64
 
       - name: Inspect image
         run: |
