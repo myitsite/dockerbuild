@@ -11,7 +11,7 @@ on: workflow_dispatch
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: myitsite/builder-maven-jdk17
+  IMAGE: myitsite/builder-base:jdk17
 
 jobs:
   build-and-push:
@@ -88,4 +88,4 @@ jobs:
       - name: Inspect image
         run: |
           docker buildx imagetools inspect \
-          ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ steps.meta.outputs.version }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE }}
