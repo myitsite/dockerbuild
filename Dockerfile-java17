@@ -21,3 +21,19 @@ ENV JAVA_VERSION $JDK_VERSION
 
 RUN echo "=== 系统架构===" && \
     echo "ARCH: $(uname -m)"
+
+ENV ARCH=$(uname -m)
+
+RUN  wget https://zacms.oss-cn-chengdu.aliyuncs.com/jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm; 
+RUN  rpm -ivh jdk-${JAVA_VERSION}_linux-${ARCH}_bin.rpm;
+
+# maven
+ENV MAVEN_VERSION 3.9.9
+RUN curl -f -L https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar -C /opt -xzv
+ENV M2_HOME /opt/apache-maven-$MAVEN_VERSION
+ENV JAVA_HOME $JDK_HOME
+ENV maven.home $M2_HOME
+ENV M2 $M2_HOME/bin
+ENV PATH $M2:$PATH:JAVA_HOME/bin
+
+
