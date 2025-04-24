@@ -12,7 +12,7 @@ on: workflow_dispatch
 env:
   REGISTRY: ghcr.io
   IMAGE: myitsite/builder-base
-  MANUAL_VERSION: jdk8 
+  MANUAL_VERSION: jdk8
 
 jobs:
   build-and-push:
